@@ -1,22 +1,23 @@
-CC=gcc
-
-CFLAGS=-Wall -Wextra -Wpedantic -std=c11
-
-SOURCES=src/*.c
-
 DIR_DEBUG = debug
 DIR_RELEASE = release
+
 
 all: build_release
 
 build_debug:
 	mkdir -p $(DIR_DEBUG)
-	$(CC) $(CFLAGS) -O0 -g $(SOURCES) -o $(DIR_DEBUG)/main.bin
+	make compile_flags="-O0 -g"  --directory=$(DIR_DEBUG) --makefile=../Makefile_Build
 
 build_release:
 	mkdir -p $(DIR_RELEASE)
-	$(CC) $(CFLAGS) -O3 $(SOURCES) -o $(DIR_RELEASE)/main.bin
+	make compile_flags="-O3" --directory=$(DIR_RELEASE) --makefile=../Makefile_Build
+
 
 clean:
-	rm -rf *.o $(DIR_DEBUG)/main.bin $(DIR_RELEASE)/main.bin
+	rm -rf $(DIR_DEBUG)/main.bin 
+	rm -rf $(DIR_DEBUG)/*.d 
+	rm -rf $(DIR_DEBUG)/*.o 
+	rm -rf $(DIR_RELEASE)/main.bin 
+	rm -rf $(DIR_RELEASE)/*.d 
+	rm -rf $(DIR_RELEASE)/*.o 
 
