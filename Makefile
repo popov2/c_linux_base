@@ -7,10 +7,10 @@ SOURCES=src/*.c
 all: build_release
 
 build_debug:
-	$(CC) $(CFLAGS) -g $(SOURCES) -o debug/main.bin
+	$(CC) $(CFLAGS) -O0 -g $(SOURCES) -o debug/main.bin
 
 build_release:
-	$(CC) $(CFLAGS) $(SOURCES) -o release/main.bin
+	$(CC) $(CFLAGS) -O3 $(SOURCES) -o release/main.bin
 
 clean:
 	rm -rf *.o debug/main.bin release/main.bin
